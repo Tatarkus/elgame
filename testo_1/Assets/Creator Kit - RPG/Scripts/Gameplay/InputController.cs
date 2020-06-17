@@ -50,13 +50,27 @@ namespace RPGM.UI
         void CharacterControl()
         {
             if (Input.GetKey(KeyCode.UpArrow))
-                model.player.nextMoveCommand = Vector3.up * stepSize;
+            {
+	            if ((Input.GetKey(KeyCode.UpArrow)) && (Input.GetKey(KeyCode.RightArrow)))
+		            model.player.nextMoveCommand = (Vector3.up * stepSize) + (Vector3.right * stepSize);
+	            else if ((Input.GetKey(KeyCode.UpArrow)) && (Input.GetKey(KeyCode.LeftArrow)))
+		            model.player.nextMoveCommand = (Vector3.up * stepSize) + (Vector3.left * stepSize);
+	            else
+		            model.player.nextMoveCommand = Vector3.up * stepSize;
+            }
             else if (Input.GetKey(KeyCode.DownArrow))
-                model.player.nextMoveCommand = Vector3.down * stepSize;
+            {
+                if ((Input.GetKey(KeyCode.DownArrow)) && (Input.GetKey(KeyCode.RightArrow)))
+                    model.player.nextMoveCommand = (Vector3.down * stepSize) + (Vector3.right * stepSize);
+                else if ((Input.GetKey(KeyCode.DownArrow)) && (Input.GetKey(KeyCode.LeftArrow)))
+                    model.player.nextMoveCommand = (Vector3.down * stepSize) + (Vector3.left * stepSize);
+                else
+                    model.player.nextMoveCommand = Vector3.down * stepSize;
+			}
+            else if (Input.GetKey(KeyCode.RightArrow))
+                model.player.nextMoveCommand = Vector3.right* stepSize;
             else if (Input.GetKey(KeyCode.LeftArrow))
                 model.player.nextMoveCommand = Vector3.left * stepSize;
-            else if (Input.GetKey(KeyCode.RightArrow))
-                model.player.nextMoveCommand = Vector3.right * stepSize;
             else
                 model.player.nextMoveCommand = Vector3.zero;
         }
