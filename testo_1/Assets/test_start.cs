@@ -1,4 +1,5 @@
 ﻿using MLAPI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +11,17 @@ public class test_start : MonoBehaviour
     void Start()
     {
         networking.StartHost();
+        print("Iniciando servidor");
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         
+    }
+    private void OnApplicationQuit()
+    {
+        print("Deteniendo servidor");
+        networking.StopHost();
     }
 }

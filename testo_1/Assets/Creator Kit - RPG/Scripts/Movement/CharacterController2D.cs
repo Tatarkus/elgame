@@ -66,7 +66,7 @@ namespace RPGM.Gameplay
         }
         private void Start()
         {
-            print("HOLO");
+           
         }
         void Update()
         {

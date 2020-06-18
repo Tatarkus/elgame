@@ -13,7 +13,7 @@ namespace RPGM.UI
     {
         public CharacterController2D controller;
         public float stepSize = 0.1f;
-        GameModel model = Schedule.GetModel<GameModel>();
+        //GameModel model = Schedule.GetModel<GameModel>();
 
         public enum State
         {
@@ -42,18 +42,7 @@ namespace RPGM.UI
                     break;
             }
         }
-        /*
-        void DialogControl()
-        {
-            controller.nextMoveCommand = Vector3.zero;
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                model.dialog.FocusButton(-1);
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-                model.dialog.FocusButton(+1);
-            if (Input.GetKeyDown(KeyCode.Space))
-                model.dialog.SelectActiveButton();
-        }
-        */
+
         void CharacterControl()
         {
             if (Input.GetKey(KeyCode.UpArrow))
