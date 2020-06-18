@@ -7,12 +7,13 @@ namespace RPGM.UI
     /// <summary>
     /// Sends user input to the correct control systems.
     /// </summary>
-    
+
 
     public class InputController : MonoBehaviour
     {
         public CharacterController2D controller;
         public float stepSize = 0.1f;
+        Vector3 movimiento = new Vector3(0, 0, 0);
         //GameModel model = Schedule.GetModel<GameModel>();
 
         public enum State
@@ -28,7 +29,7 @@ namespace RPGM.UI
 
         private void Start()
         {
-            
+
         }
         void Update()
         {
@@ -45,6 +46,7 @@ namespace RPGM.UI
 
         void CharacterControl()
         {
+            /*
             if (Input.GetKey(KeyCode.UpArrow))
             {
 	            if ((Input.GetKey(KeyCode.UpArrow)) && (Input.GetKey(KeyCode.RightArrow)))
@@ -69,6 +71,34 @@ namespace RPGM.UI
                 controller.nextMoveCommand = Vector3.left * stepSize;
             else
                 controller.nextMoveCommand = Vector3.zero;
+            */
+
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                movimiento += Vector3.up;
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                movimiento += Vector3.down;
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                movimiento += Vector3.left;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                movimiento += Vector3.right;
+            }
+            controller.nextMoveCommand = movimiento.normalized*stepSize;
+            movimiento = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                stepSize = 0.2f;
+            } 
+            if(Input.GetKeyUp(KeyCode.Space))
+                stepSize = 0.1f;
         }
     }
 }
