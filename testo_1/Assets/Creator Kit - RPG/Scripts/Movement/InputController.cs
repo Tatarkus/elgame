@@ -13,7 +13,7 @@ namespace RPGM.UI
     {
         public CharacterController2D controller;
         public float stepSize = 0.1f;
-        //GameModel model = Schedule.GetModel<GameModel>();
+        GameModel model = Schedule.GetModel<GameModel>();
 
         public enum State
         {
