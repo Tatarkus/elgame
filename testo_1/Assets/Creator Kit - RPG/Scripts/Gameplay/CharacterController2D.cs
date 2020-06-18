@@ -64,7 +64,10 @@ namespace RPGM.Gameplay
                 animator.SetInteger("WalkY", direction.y < 0 ? 1 : direction.y > 0 ? -1 : 0);
             }
         }
-
+        private void Start()
+        {
+            print("HOLO");
+        }
         void Update()
         {
             switch (state)

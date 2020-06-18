@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 8171158353334016009}
   - component: {fileID: 8171158353334016011}
   - component: {fileID: 8171158353334016022}
+  - component: {fileID: 1810796579121276099}
+  - component: {fileID: -7695956297248558257}
+  - component: {fileID: 1334463384757579643}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -51,6 +54,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -62,6 +66,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -174,6 +179,85 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0068097115, y: 0.15}
   m_Size: {x: 0.3, y: 0.01}
   m_Direction: 0
+--- !u!114 &1810796579121276099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171158353334016015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6ce09d4840c401995632acfaf7593f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 8171158353334016009}
+  stepSize: 0.1
+--- !u!114 &-7695956297248558257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171158353334016015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 209037615, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkedInstanceId: 0
+  PrefabHash: 17033050231420302466
+  PrefabHashGenerator: Character
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+--- !u!114 &1334463384757579643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171158353334016015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -410691123, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FixedSendsPerSecond: 20
+  AssumeSyncedSends: 1
+  InterpolatePosition: 1
+  SnapDistance: 10
+  InterpolateServer: 1
+  MinMeters: 0.15
+  MinDegrees: 1.5
+  ExtrapolatePosition: 0
+  MaxSendsToExtrapolate: 5
+  Channel: 
+  EnableRange: 0
+  EnableNonProvokedResendChecks: 0
+  DistanceSendrate:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 500
+      value: 20
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8171158353547470275
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +303,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -230,6 +315,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
