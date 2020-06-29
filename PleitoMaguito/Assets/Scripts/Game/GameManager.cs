@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
 
+    private void Start()
+    {
+        Client.instance.ConnectToServer();
+
+
+    }
     private void Awake()
     {
         if (instance == null)
