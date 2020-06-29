@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 944970973}
+    - target: {fileID: 2960298958225921628, guid: a2d7541f29831b84694fc84f17a3e591,
+        type: 3}
+      propertyPath: baseStepSize
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7388508876812085904, guid: a2d7541f29831b84694fc84f17a3e591,
         type: 3}
       propertyPath: controller
@@ -220,7 +225,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: LocalPlayerOffline
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8171158353334016008, guid: a2d7541f29831b84694fc84f17a3e591, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a2d7541f29831b84694fc84f17a3e591, type: 3}
 --- !u!114 &944970973 stripped
 MonoBehaviour:
