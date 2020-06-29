@@ -21,6 +21,8 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
+            //Maybe we have to store the username before sending the packet
+            //since I'm planning to destroy the scene that has the usernameField component
             _packet.Write(Client.instance.myId);
             _packet.Write(UIManager.instance.usernameField.text);
 
