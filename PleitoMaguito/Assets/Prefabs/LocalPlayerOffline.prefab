@@ -190,8 +190,8 @@ GameObject:
   - component: {fileID: 8171158353334016010}
   - component: {fileID: 8171158353334016011}
   - component: {fileID: 8171158353334016022}
-  - component: {fileID: 7388508876812085904}
   - component: {fileID: 250863776879838650}
+  - component: {fileID: 7388508876812085904}
   - component: {fileID: 2960298958225921628}
   m_Layer: 0
   m_Name: LocalPlayerOffline
@@ -308,7 +308,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8171158353334016015}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -317,21 +317,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0068097115, y: 0.15}
   m_Size: {x: 0.3, y: 0.01}
   m_Direction: 0
---- !u!114 &7388508876812085904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8171158353334016015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33bed7a66ae608648912ed800e9416bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  username: 
-  controller: {fileID: 0}
 --- !u!114 &250863776879838650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +332,21 @@ MonoBehaviour:
   nextMoveCommand: {x: 0, y: 0, z: 0}
   animator: {fileID: 8171158353334016010}
   flipX: 1
+--- !u!114 &7388508876812085904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171158353334016015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33bed7a66ae608648912ed800e9416bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  username: 
+  controller: {fileID: 250863776879838650}
 --- !u!114 &2960298958225921628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5973be5d6ec171b49a289de53b156fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 7388508876812085904}
   stepSize: 0.1
   baseStepSize: 0.001
 --- !u!1 &8171158353547470275
