@@ -45,9 +45,15 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlayerFireball()
+    public static void PlayerFireball(Vector3 _facing)
     {
-
+        Debug.Log("sending a fireball");
+        using (Packet _packet = new Packet((int)ClientPackets.playerFireball))
+        {
+            _packet.Write(Client.instance.myId);
+            _packet.Write(_facing);
+            SendTCPData(_packet);
+        }
     }
     #endregion
 }

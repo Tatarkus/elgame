@@ -27,7 +27,9 @@ public class UIManager : MonoBehaviour
     public void ConnectToServer()
     {
         startMenu.SetActive(false);
-        usernameField.interactable = false; 
+        usernameField.interactable = false;
+        Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cam.enabled = false;
         SceneManager.LoadScene (sceneName:"Game");
 
         

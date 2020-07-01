@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
+    public GameObject fire;
 
     private void Start()
     {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         if (_id == Client.instance.myId)
         {
             _player = Instantiate(localPlayerPrefab, _position, _rotation);
+
         }
         else
         {
@@ -53,5 +55,19 @@ public class GameManager : MonoBehaviour
         Destroy(players[_id].gameObject);
         Destroy(players[_id].GetComponent<PlayerManager>());
         GameManager.players.Remove(_id);
+    }
+
+    public void FireballImpact(int _id, Vector3 _impactLocation)
+    {
+        Debug.Log($"FIRE IN  {_impactLocation}");
+        if (fire == null) { 
+            Instantiate(fire, _impactLocation,Quaternion.identity);
+        }
+        else
+        {
+            //Destroy(fire);
+            Instantiate(fire, _impactLocation, Quaternion.identity);
+        }
+        
     }
 }

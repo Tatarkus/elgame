@@ -33,6 +33,15 @@ public class ClientHandle : MonoBehaviour
         GameManager.instance.RemovePlayer(_id);
     }
 
+    public static void FireballImpact(Packet _packet)
+    {
+        
+        int _id = _packet.ReadInt();
+        Vector3 impactLocation = _packet.ReadVector3();
+        Debug.Log($"Got an Impact of a fireball. Location: {impactLocation}");
+        GameManager.instance.FireballImpact(_id, impactLocation);
+    }
+
     public static void PlayerPosition(Packet _packet)
     {
         int _id = _packet.ReadInt();

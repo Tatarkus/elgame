@@ -278,6 +278,7 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.removePlayer, ClientHandle.RemovePlayer },
+            { (int)ServerPackets.fireballImpact, ClientHandle.FireballImpact },
         };
         Debug.Log("Initialized packets.");
     }
