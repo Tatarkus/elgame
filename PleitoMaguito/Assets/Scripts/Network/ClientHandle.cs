@@ -38,8 +38,24 @@ public class ClientHandle : MonoBehaviour
         
         int _id = _packet.ReadInt();
         Vector3 impactLocation = _packet.ReadVector3();
-        Debug.Log($"Got an Impact of a fireball. Location: {impactLocation}");
         GameManager.instance.FireballImpact(_id, impactLocation);
+    }
+
+    public static void LocalPlayerPosition(Packet _packet)
+    {
+        int _lastAck = _packet.ReadInt();
+        int _id = _packet.ReadInt();
+        if (_id == Client.instance.myId)
+        {
+            GameManager.players[_id].lastAck = _lastAck;
+        }
+        Vector3 _position = _packet.ReadVector3();
+        if (GameManager.players.ContainsKey(_id))
+        {    
+            GameManager.players[_id].Move(_position);
+            
+        }
+        
     }
 
     public static void PlayerPosition(Packet _packet)
@@ -47,10 +63,11 @@ public class ClientHandle : MonoBehaviour
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
         if (GameManager.players.ContainsKey(_id))
-        {    
-            GameManager.players[_id].Move(_id,_position);
+        {
+            GameManager.players[_id].Move(_position);
+
         }
-        
+
     }
 
     public static void PlayerRotation(Packet _packet)

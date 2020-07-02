@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
 
     public void FireballImpact(int _id, Vector3 _impactLocation)
     {
-        Debug.Log($"FIRE IN  {_impactLocation}");
         if (fire == null) { 
             Instantiate(fire, _impactLocation,Quaternion.identity);
         }

@@ -7,12 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     //public Transform camTransform;
     Vector3 mousePos;
-
+    
     private void Start()
     {
         //Camera should "get" the player prefab, not the other way around
         //Camera cam1 = GameObject.Find("Main Camera").GetComponent<Camera>();
-
 
     }
     private void Update()
@@ -39,11 +38,11 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.D),
             Input.GetKey(KeyCode.A),
         };
-        Vector3 movimiento = new Vector3((_inputs[2] ? 1 : _inputs[3] ? -1 : 0),
-                (_inputs[0] ? 1 : _inputs[1] ? -1 : 0));
-        GameManager.players[Client.instance.myId].LocalMove(movimiento);
         
-        ClientSend.PlayerMovement(_inputs);
+        GameManager.players[Client.instance.myId].ClientPrediction(_inputs);
 
+        
     }
+
+
 }
