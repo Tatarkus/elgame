@@ -48,7 +48,7 @@ public class ClientHandle : MonoBehaviour
         Vector3 _position = _packet.ReadVector3();
         if (GameManager.players.ContainsKey(_id))
         {    
-            GameManager.players[_id].Move(_position);
+            GameManager.players[_id].Move(_id,_position);
         }
         
     }
