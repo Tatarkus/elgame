@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     //TODO: set stepSize from server
     public Controller2D controller;
     public Vector3[] prevStates;
+    public Vector3 serverState;
     public int lastPacketId = 0;
     public Vector3 movimiento;
     public int lastAck = 0;
@@ -19,49 +20,97 @@ public class PlayerManager : MonoBehaviour
     {
         Canvas c = GetComponentInChildren(typeof(Canvas)) as Canvas;
         Text t = c.GetComponentInChildren(typeof(Text)) as Text;
-        prevStates = new Vector3[100];
+        prevStates = new Vector3[1000];
         prevStates[0] = this.transform.position;
+        serverState = this.transform.position;
         t.text = username;
-      
+        
+
     }
 
     public void ClientPrediction(bool[] _inputs)
     {
 
-        stepSpeed = Time.smoothDeltaTime * 2;
 
-         movimiento = new Vector3((_inputs[2] ? 1 : _inputs[3] ? -1 : 0),
+        stepSpeed = 0.01666666f;
+
+        movimiento = new Vector3((_inputs[2] ? 1 : _inputs[3] ? -1 : 0),
                 (_inputs[0] ? 1 : _inputs[1] ? -1 : 0));
 
-        if(lastPacketId >= 99)
+        //Move(this.transform.position + movimiento * stepSpeed);
+        
+            
+        if (lastPacketId >= 1000)
         {
             lastPacketId = 0;
         }
-        prevStates[lastPacketId] = this.transform.position+ (movimiento  * stepSpeed);
+        
         ClientSend.PlayerMovement(lastPacketId, _inputs);
-        lastPacketId++;
-        //this.transform.position += movimiento * 2 * Time.smoothDeltaTime;
-        //controller.nextMoveCommand = movimiento;
-        Debug.Log($"last ack: {lastAck} and the last packet: {lastPacketId}");
-        for (int i = lastAck; i < lastPacketId; i++)
+        prevStates[lastPacketId] = movimiento;
+        //Debug.Log($"XXXXXXXX lastPacketID {lastPacketId} moviemiento: {movimiento} XXXXXXXXX");
+       // Debug.Log($"******** prevStates[lastPacketId] = {prevStates[lastPacketId]}*********");
+
+        
+
+
+
+        Vector3 posicion = serverState;
+        
+        //Debug.Log($"DEBUG DE POSICION DEL CLIENTE: {this.transform.position}");
+        //Debug.Log($"Paquete: {lastAck}");
+        //Debug.Log($"Ultimo paquete enviado: {lastPacketId}");
+        //Debug.Log($"Posicion retornada por el servidor: {serverState}");
+
+        for (int i = lastAck; i <= lastPacketId; i++)
         {
-            Debug.Log($"Prev States: {prevStates[i]}");
-            controller.nextMoveCommand = prevStates[i] - this.transform.position;
-            this.transform.position = prevStates[i];
+            //Debug.Log($" revisando paquete.... {i}");
+            //Debug.Log($"aplicando inputs {prevStates[i]} con velocidad {stepSpeed} a la posicion: {serverState}");
+            posicion = posicion + prevStates[i] * stepSpeed;
             
+            //Debug.Log($"resultó la posicion {posicion}");
         }
+        Debug.Log($"UR HERE {posicion}");
+        this.transform.position = posicion;
+        controller.nextMoveCommand = movimiento;
+        //this.transform.position = posicion;
+        lastAck += 1;
+        lastPacketId++;
     }
 
-    public void LocalMove(int _lastAck,Vector3 _position)
+    public void PlayerReconciliation(int _lastAck,Vector3 _position)
     {
+        serverState = _position;
+        lastAck = _lastAck;
+        /*Debug.Log($"DEBUG DE POSICION DEL CLIENTE: {this.transform.position}");
+        Debug.Log($"Paquete: {_lastAck}");
+        Debug.Log($"Ultimo paquete enviado: {lastPacketId}");
+        Debug.Log($"Posicion retornada por el servidor: {_position}");
+        for (int i = _lastAck; i <= lastPacketId; i++)
+        {
+            Debug.Log($" pasos restantes {lastPacketId - i}");
+            Debug.Log($"aplicando inputs {prevStates[_lastAck]} con velocidad {stepSpeed} a la posicion: {_position}");
+            _position += prevStates[_lastAck] *stepSpeed;
+            Debug.Log($"resultó la posicion {_position}");
 
+
+
+        }
+        if (_position == this.transform.position)
+        {
+
+            Debug.Log($"CORRECT PREDICT");
+        }
+        else
+        {
+            Debug.Log($"INCORRECT client: {this.transform.position} server: {_position}");
+        }*/
     }
 
     public void Move(Vector3 _position)
-    {   
+    {
         //do some player interpolation here
         Vector3 _nextMove = _position - this.transform.position;
-        //controller.nextMoveCommand = _nextMove.normalized;
+        controller.nextMoveCommand = _nextMove.normalized;
         this.transform.position = _position;
 
         

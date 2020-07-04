@@ -191,6 +191,8 @@ GameObject:
   - component: {fileID: -3970397618164872078}
   - component: {fileID: 4491110976650405821}
   - component: {fileID: 7388508876812085904}
+  - component: {fileID: 4833279624359061865}
+  - component: {fileID: 3166115775749840541}
   m_Layer: 0
   m_Name: LocalPlayer
   m_TagString: Untagged
@@ -275,7 +277,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 22100000, guid: 7bfb43d7068f94aff8f20e9a7916bee6, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -325,6 +327,49 @@ MonoBehaviour:
   id: 0
   username: 
   controller: {fileID: -3970397618164872078}
+  prevStates: []
+  serverState: {x: 0, y: 0, z: 0}
+  lastPacketId: 0
+  movimiento: {x: 0, y: 0, z: 0}
+  lastAck: 0
+  stepSpeed: 0
+--- !u!70 &4833279624359061865
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171158353334016015}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!50 &3166115775749840541
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171158353334016015}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 0.7748008
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 2
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8171158353547470275
 GameObject:
   m_ObjectHideFlags: 0

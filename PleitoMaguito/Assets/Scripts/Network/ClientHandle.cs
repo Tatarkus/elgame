@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -45,17 +46,12 @@ public class ClientHandle : MonoBehaviour
     {
         int _lastAck = _packet.ReadInt();
         int _id = _packet.ReadInt();
-        if (_id == Client.instance.myId)
-        {
-            GameManager.players[_id].lastAck = _lastAck;
-        }
         Vector3 _position = _packet.ReadVector3();
         if (GameManager.players.ContainsKey(_id))
         {    
-            GameManager.players[_id].Move(_position);
+            GameManager.players[_id].PlayerReconciliation(_lastAck,_position);
             
         }
-        
     }
 
     public static void PlayerPosition(Packet _packet)
