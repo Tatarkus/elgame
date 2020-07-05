@@ -32,7 +32,7 @@ public class PlayerManager : MonoBehaviour
     {
 
 
-        stepSpeed = 0.01666666f;
+        stepSpeed = 0.05f;
 
         movimiento = new Vector3((_inputs[2] ? 1 : _inputs[3] ? -1 : 0),
                 (_inputs[0] ? 1 : _inputs[1] ? -1 : 0));
