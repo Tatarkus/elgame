@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
@@ -278,6 +278,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
             { (int)ServerPackets.removePlayer, ClientHandle.RemovePlayer },
+            { (int)ServerPackets.fireballImpact, ClientHandle.FireballImpact },
+            { (int)ServerPackets.localPlayerPosition, ClientHandle.LocalPlayerPosition },
         };
         Debug.Log("Initialized packets.");
     }

@@ -1,35 +1,41 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
+using UnityEngine;
 
 
-/// <summary>
-/// Sends user input to the correct control systems.
-/// </summary>
+    /// <summary>
+    /// Sends user input to the correct control systems.
+    /// </summary>
 
 
-public class PlayerControllerOffline : MonoBehaviour
-{
-    public PlayerManager playerManager;
-    public float stepSize = 0.001f;
-    public float baseStepSize = 0.001f;
-    Vector3 movimiento = new Vector3(0, 0, 0);
-    //GameModel model = Schedule.GetModel<GameModel>();
-
-    public enum State
+    public class PlayerControllerOffline : MonoBehaviour
     {
-        CharacterControl,
-        DialogControl,
-        Pause
-    }
+        public PlayerManager playerManager;
+        public float stepSize = 0.001f;
+        public float baseStepSize = 0.001f;
+    Vector3 direccion = new Vector3(0, 0, 0);
+        //GameModel model = Schedule.GetModel<GameModel>();
 
-    State state;
+        public enum State
+        {
+            CharacterControl,
+            DialogControl,
+            Pause
+        }
 
-    public void ChangeState(State state) => this.state = state;
+        State state;
 
-    private void Start()
-    {
+        public void ChangeState(State state) => this.state = state;
 
-    }
-    void Update()
+        private void Start()
+        {
+
+        }
+        void Update()
+        {
+           
+        }
+
+    private void FixedUpdate()
     {
         switch (state)
         {
@@ -43,33 +49,27 @@ public class PlayerControllerOffline : MonoBehaviour
     }
 
     void CharacterControl()
-    {
-        if (Input.GetKey(KeyCode.W))
         {
-            movimiento += Vector3.up;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            movimiento += Vector3.down;
-        }
+            bool[] _inputs = new bool[]
+         {
+                Input.GetKey(KeyCode.W),
+                Input.GetKey(KeyCode.S),
+                Input.GetKey(KeyCode.D),
+                Input.GetKey(KeyCode.A),
+         };
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            movimiento += Vector3.left;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            movimiento += Vector3.right;
-        }
-        playerManager.Move(movimiento * stepSize);
-        //controller.nextMoveCommand = movimiento.normalized * stepSize;
-        //movimiento = Vector3.zero;
+            direccion= new Vector2((_inputs[2] ? 1 : _inputs[3] ? -1:0),
+                (_inputs[0] ? 1 : _inputs[1] ? -1 : 0));
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            stepSize *= 2;
+            playerManager.OfflineMove(direccion);
+            //controller.nextMoveCommand = movimiento.normalized * stepSize;
+            //movimiento = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                stepSize =  baseStepSize*2;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+                stepSize = baseStepSize;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-            stepSize = baseStepSize;
     }
-}

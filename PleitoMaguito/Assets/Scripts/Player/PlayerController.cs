@@ -1,10 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //public Transform camTransform;
+    Vector3 mousePos;
+    
+    private void Start()
+    {
+        //Camera should "get" the player prefab, not the other way around
+        //Camera cam1 = GameObject.Find("Main Camera").GetComponent<Camera>();
 
+    }
+    private void Update()
+    {
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x,Input.mousePosition.y,10));
+ 
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        { 
+            ClientSend.PlayerFireball(mousePos);
+        }
+        
+    }
     private void FixedUpdate()
     {
         SendInputToServer();
@@ -19,11 +38,11 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.D),
             Input.GetKey(KeyCode.A),
         };
+        
+        GameManager.players[Client.instance.myId].ClientPrediction(_inputs);
 
-        ClientSend.PlayerMovement(_inputs);
-        /*Vector3 nextmove = new Vector3((_inputs[2] ? 1 : 0)-(_inputs[3] ? 1 : 0),
-            (_inputs[0] ? 1 : 0) - (_inputs[1] ? 1 : 0),0);
-
-        controller.nextMoveCommand = nextmove;*/
+        
     }
+
+
 }

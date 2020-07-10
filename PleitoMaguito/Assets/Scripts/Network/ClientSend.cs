@@ -21,6 +21,8 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
+            //Maybe we have to store the username before sending the packet
+            //since I'm planning to destroy the scene that has the usernameField component
             _packet.Write(Client.instance.myId);
             _packet.Write(UIManager.instance.usernameField.text);
 
@@ -28,10 +30,11 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlayerMovement(bool[] _inputs)
+    public static void PlayerMovement(int _packetId, bool[] _inputs)
     {
         using (Packet _packet = new Packet((int)ClientPackets.playerMovement))
         {
+            _packet.Write(_packetId);
             _packet.Write(_inputs.Length);
             foreach (bool _input in _inputs)
             {
@@ -43,9 +46,15 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlayerFireball()
+    public static void PlayerFireball(Vector3 _facing)
     {
-
+        Debug.Log("sending a fireball");
+        using (Packet _packet = new Packet((int)ClientPackets.playerFireball))
+        {
+            _packet.Write(Client.instance.myId);
+            _packet.Write(_facing);
+            SendTCPData(_packet);
+        }
     }
     #endregion
 }

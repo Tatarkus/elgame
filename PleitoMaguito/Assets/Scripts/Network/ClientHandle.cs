@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -33,15 +34,36 @@ public class ClientHandle : MonoBehaviour
         GameManager.instance.RemovePlayer(_id);
     }
 
+    public static void FireballImpact(Packet _packet)
+    {
+        
+        int _id = _packet.ReadInt();
+        Vector3 impactLocation = _packet.ReadVector3();
+        GameManager.instance.FireballImpact(_id, impactLocation);
+    }
+
+    public static void LocalPlayerPosition(Packet _packet)
+    {
+        int _lastAck = _packet.ReadInt();
+        int _id = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+        if (GameManager.players.ContainsKey(_id))
+        {    
+            GameManager.players[_id].PlayerReconciliation(_lastAck,_position);
+            
+        }
+    }
+
     public static void PlayerPosition(Packet _packet)
     {
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
         if (GameManager.players.ContainsKey(_id))
-        {    
+        {
             GameManager.players[_id].Move(_position);
+
         }
-        
+
     }
 
     public static void PlayerRotation(Packet _packet)
